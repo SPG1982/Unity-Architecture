@@ -4,17 +4,17 @@ using UnityEngine;
 
 namespace DI {
 
-    public sealed class KeyboardInput : MonoBehaviour, IStartGameListener, IFinishGameListener
+    public sealed class KeyboardInput : MonoBehaviour, IGameState
     {
         public event Action<Vector3> OnMove;
 
         private bool isActive;
-        void IStartGameListener.OnStartGame()
+        void IGameState.OnStartGame()
         {
             this.isActive = true;
         }
 
-        void IFinishGameListener.OnFinishGame()
+        void IGameState.OnFinishGame()
         {
             this.isActive = false;
         }
@@ -52,6 +52,7 @@ namespace DI {
         {
             this.OnMove?.Invoke(direction);
         }
+
     }
 
 }

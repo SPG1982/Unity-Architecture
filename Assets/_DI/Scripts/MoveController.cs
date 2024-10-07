@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace DI
 {
-    public sealed class MoveController : MonoBehaviour, IStartGameListener, IFinishGameListener
+    public sealed class MoveController : MonoBehaviour, IGameState
     {
         [SerializeField]
         private KeyboardInput input;
@@ -14,12 +14,12 @@ namespace DI
         private Player player;
 
 
-        void IStartGameListener.OnStartGame()
+        void IGameState.OnStartGame()
         {
             this.input.OnMove += this.OnMove;
         }
 
-        void IFinishGameListener.OnFinishGame()
+        void IGameState.OnFinishGame()
         {
             this.input.OnMove -= this.OnMove;
         }

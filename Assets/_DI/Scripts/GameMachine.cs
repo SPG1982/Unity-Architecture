@@ -4,15 +4,6 @@ using UnityEngine;
 
 namespace Assets._DI.Scripts
 {
-    public enum GameState
-    {
-        OFF = 0,
-        PLAY = 1,
-        PAUSE = 2,
-        FINISH = 3,
-    }
-
-
     public sealed class GameMachine : MonoBehaviour
     {
         public GameState GameState
@@ -22,82 +13,35 @@ namespace Assets._DI.Scripts
 
         private readonly List<object> listeners = new();
 
-        private GameState gameState = GameState.OFF;
+        private GameState gameState = GameState.FINISH;
 
         [ContextMenu("Start Game")]
         public void StartGame()
         {
-            if (this.gameState != GameState.OFF)
-            {
-                Debug.LogWarning($"You can start game only from {GameState.OFF} state!");
-                return;
-            }
+            if (this.gameState != GameState.START)
 
-            this.gameState = GameState.PLAY;
+            this.gameState = GameState.START;
 
             foreach (var listener in this.listeners)
             {
-                if (listener is IStartGameListener startListener)
+                if (listener is IGameState startListener)
                 {
                     startListener.OnStartGame();
                 }
             }
         }
 
-        [ContextMenu("Pause Game")]
-        public void PauseGame()
-        {
-            if (this.gameState != GameState.PLAY)
-            {
-                Debug.LogWarning($"You can pause game only from {GameState.PLAY} state!");
-                return;
-            }
-
-            this.gameState = GameState.PAUSE;
-
-            foreach (var listener in this.listeners)
-            {
-                if (listener is IPauseGameListener pauseListener)
-                {
-                    pauseListener.OnPauseGame();
-                }
-            }
-        }
-
-        [ContextMenu("Resume Game")]
-        public void ResumeGame()
-        {
-            if (this.gameState != GameState.PAUSE)
-            {
-                Debug.LogWarning($"You can resume game only from {GameState.PAUSE} state!");
-                return;
-            }
-
-            this.gameState = GameState.PLAY;
-
-            foreach (var listener in this.listeners)
-            {
-                if (listener is IResumeGameListener resumeListener)
-                {
-                    resumeListener.OnResumeGame();
-                }
-            }
-        }
 
         [ContextMenu("Finish Game")]
         public void FinishGame()
         {
-            if (this.gameState != GameState.PLAY)
-            {
-                Debug.LogWarning($"You can finish game only from {GameState.PLAY} state!");
-                return;
-            }
+            if (this.gameState != GameState.FINISH)
 
             this.gameState = GameState.FINISH;
 
             foreach (var listener in this.listeners)
             {
-                if (listener is IFinishGameListener finishListener)
+                if (listener is IGameState finishListener)
                 {
                     finishListener.OnFinishGame();
                 }
