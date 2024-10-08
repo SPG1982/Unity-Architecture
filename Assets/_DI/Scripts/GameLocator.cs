@@ -5,21 +5,21 @@ using UnityEngine;
 
 public sealed class GameLocator : MonoBehaviour
 {
-    public readonly List<object> services = new();
+    private readonly List<object> services = new();
 
     public void AddService(object service)
     {
-        services.Add(service);
+        this.services.Add(service);
     }
 
     public void RemoveService(object service)
     {
-        services.Remove(service);
+        this.services.Remove(service);
     }
 
     public T GetService<T>()
     {
-        foreach (var service in services)
+        foreach (var service in this.services)
         {
             if (service is T result)
             {

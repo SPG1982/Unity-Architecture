@@ -4,17 +4,17 @@ using UnityEngine;
 
 namespace DI {
 
-    public sealed class KeyboardInput : MonoBehaviour, IGameState, IMoveInput
+    public sealed class KeyboardInput : MonoBehaviour, IStartGameListener, IFinishGameListener, IMoveInput
     {
         public event Action<Vector3> OnMove;
 
         private bool isActive;
-        public void OnStartGame()
+        void IStartGameListener.OnStartGame()
         {
             this.isActive = true;
         }
 
-        void IGameState.OnFinishGame()
+        void IFinishGameListener.OnFinishGame()
         {
             this.isActive = false;
         }
@@ -29,7 +29,6 @@ namespace DI {
 
         private void HandleKeyboard()
         {
-            //Debug.Log("11111");
             if (Input.GetKey(KeyCode.UpArrow))
             {
                 this.Move(Vector3.forward);

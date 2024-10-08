@@ -6,7 +6,7 @@ using UnityEngine;
 namespace DI
 {
 
-    public sealed class MoveController : MonoBehaviour, IGameState
+    public sealed class MoveController : MonoBehaviour, IStartGameListener, IFinishGameListener
     {
         private IMoveInput input;
 
@@ -19,14 +19,15 @@ namespace DI
         }
 
 
-        public void OnStartGame()
+        void IStartGameListener.OnStartGame()
         {
-            input.OnMove += OnMove;
+
+            this.input.OnMove += this.OnMove;
         }
 
-        void IGameState.OnFinishGame()
+        void IFinishGameListener.OnFinishGame()
         {
-            input.OnMove -= OnMove;
+            this.input.OnMove -= this.OnMove;
         }
 
         private void OnMove(Vector3 direction)

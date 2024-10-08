@@ -4,12 +4,28 @@ using UnityEngine;
 
 public enum GameState
 {
-    START = 1,
-    FINISH = 2,
+    OFF = 0,
+    PLAY = 1,
+    PAUSE = 2,
+    FINISH = 3,
 }
 
-public interface IGameState
+public interface IStartGameListener
 {
     void OnStartGame();
+}
+
+public interface IPauseGameListener
+{
+    void OnPauseGame();
+}
+
+public interface IResumeGameListener
+{
+    void OnResumeGame();
+}
+
+public interface IFinishGameListener
+{
     void OnFinishGame();
 }
