@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using DI;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,40 +8,52 @@ namespace Assets._DI.Scripts
 {
     public sealed class GameMachine : MonoBehaviour
     {
-        public GameState GameState
-        {
-            get { return this.gameState; }
-        }
+        [SerializeField]
+        private GameLocator gameLocator;
 
-        private readonly List<object> listeners = new();
 
         private GameState gameState = GameState.FINISH;
+
+        public GameState GameState
+        {
+            get { return gameState; }
+        }
+
+        
 
         [ContextMenu("Start Game")]
         public void StartGame()
         {
-            if (this.gameState != GameState.START)
+            if (gameState != GameState.START)
 
-            this.gameState = GameState.START;
+            gameState = GameState.START;
 
-            foreach (var listener in this.listeners)
-            {
-                if (listener is IGameState startListener)
-                {
-                    startListener.OnStartGame();
-                }
-            }
+            //foreach (var listener in gameLocator.services)
+            //{
+            //    if (listener is IGameState startListener)
+            //    {
+            //        startListener.OnStartGame();
+            //    }
+            //}
+
+            KeyboardInput listenerKI = gameLocator.GetService<KeyboardInput>();
+            listenerKI.OnStartGame();
+
+            MoveController listenerMC = gameLocator.GetService<MoveController>();
+            listenerMC.OnStartGame();
+            //Debug.Log(listenerMC.GetType().ToString());
+            //Console.WriteLine(listenerMC.GetType());
         }
 
 
         [ContextMenu("Finish Game")]
         public void FinishGame()
         {
-            if (this.gameState != GameState.FINISH)
+            if (gameState != GameState.FINISH)
 
-            this.gameState = GameState.FINISH;
+            gameState = GameState.FINISH;
 
-            foreach (var listener in this.listeners)
+            foreach (var listener in gameLocator.services)
             {
                 if (listener is IGameState finishListener)
                 {
@@ -48,14 +62,6 @@ namespace Assets._DI.Scripts
             }
         }
 
-        public void AddListener(object listener)
-        {
-            this.listeners.Add(listener);
-        }
 
-        public void RemoveListener(object listener)
-        {
-            this.listeners.Remove(listener);
-        }
     }
 }

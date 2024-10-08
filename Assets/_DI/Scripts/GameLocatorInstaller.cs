@@ -12,9 +12,9 @@ public sealed class GameLocatorInstaller : MonoBehaviour
 
     private void Awake()
     {
-        foreach (var service in this.gameServices)
+        foreach (var service in gameServices)
         {
-            this.gameLocator.AddService(service);
+            gameLocator.AddService(service);
         }
     }
 }

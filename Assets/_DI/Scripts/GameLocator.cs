@@ -5,7 +5,7 @@ using UnityEngine;
 
 public sealed class GameLocator : MonoBehaviour
 {
-    private readonly List<object> services = new();
+    public readonly List<object> services = new();
 
     public void AddService(object service)
     {

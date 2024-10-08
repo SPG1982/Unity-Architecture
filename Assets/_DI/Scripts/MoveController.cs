@@ -5,28 +5,33 @@ using UnityEngine;
 
 namespace DI
 {
+
     public sealed class MoveController : MonoBehaviour, IGameState
     {
-        [SerializeField]
-        private KeyboardInput input;
+        private IMoveInput input;
 
-        [SerializeField]
-        private Player player;
+        private IPlayer player;
 
-
-        void IGameState.OnStartGame()
+        public void Construct(IMoveInput input, IPlayer player)
         {
-            this.input.OnMove += this.OnMove;
+            this.input = input;
+            this.player = player;
+        }
+
+
+        public void OnStartGame()
+        {
+            input.OnMove += OnMove;
         }
 
         void IGameState.OnFinishGame()
         {
-            this.input.OnMove -= this.OnMove;
+            input.OnMove -= OnMove;
         }
 
         private void OnMove(Vector3 direction)
         {
-            this.player.Move(direction);
+            player.Move(direction);
         }
     }
 }

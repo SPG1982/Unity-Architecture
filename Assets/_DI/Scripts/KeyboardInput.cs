@@ -4,12 +4,12 @@ using UnityEngine;
 
 namespace DI {
 
-    public sealed class KeyboardInput : MonoBehaviour, IGameState
+    public sealed class KeyboardInput : MonoBehaviour, IGameState, IMoveInput
     {
         public event Action<Vector3> OnMove;
 
         private bool isActive;
-        void IGameState.OnStartGame()
+        public void OnStartGame()
         {
             this.isActive = true;
         }
@@ -48,7 +48,7 @@ namespace DI {
             }
         }
 
-        private void Move(Vector3 direction)
+        public void Move(Vector3 direction)
         {
             this.OnMove?.Invoke(direction);
         }

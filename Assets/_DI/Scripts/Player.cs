@@ -3,7 +3,8 @@ using UnityEngine;
 
 namespace DI
 {
-    public sealed class Player : MonoBehaviour
+
+    public sealed class Player : MonoBehaviour, IPlayer
     {
         [SerializeField]
         private float speed = 2.0f;
@@ -12,5 +13,6 @@ namespace DI
         {
             this.transform.position += direction * this.speed * Time.deltaTime;
         }
+
     }
 }
