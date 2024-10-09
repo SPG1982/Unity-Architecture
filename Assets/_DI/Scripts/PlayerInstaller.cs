@@ -7,8 +7,7 @@ public sealed class PlayerInstaller : MonoBehaviour, IGameServiceProvider, IGame
     [SerializeField]
     private Player player;
 
-    [SerializeField]
-    private MoveController moveController;
+    private readonly MoveController moveController = new();
 
     //TODO: Подключить контроллер камеры:
     //[SerializeField]
@@ -17,7 +16,6 @@ public sealed class PlayerInstaller : MonoBehaviour, IGameServiceProvider, IGame
 
     IEnumerable<object> IGameServiceProvider.GetServices()
     {
-        Debug.Log("GetServices");
         yield return this.player;
     }
 
@@ -27,7 +25,7 @@ public sealed class PlayerInstaller : MonoBehaviour, IGameServiceProvider, IGame
         //yield return this.cameraController;
     }
 
-    void IGameConstructor.ConstructGame(IGameLocator serviceLocator)
+    void IGameConstructor.ConstructGame(GameContext serviceLocator)
     {
         var keyboardInput = serviceLocator.GetService<IMoveInput>();
         this.moveController.Construct(keyboardInput, this.player);
