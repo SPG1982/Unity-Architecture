@@ -15,12 +15,6 @@ public sealed class PlayerInstaller : MonoBehaviour, IGameServiceProvider, IGame
     //private CameraController cameraController;
 
 
-    IEnumerable<object> IGameServiceProvider.Test() {
-        Debug.Log("реяр");
-        yield return this.player;
-    }
-
-
     IEnumerable<object> IGameServiceProvider.GetServices()
     {
         Debug.Log("GetServices");

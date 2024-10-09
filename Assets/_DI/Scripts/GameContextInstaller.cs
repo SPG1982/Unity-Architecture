@@ -17,17 +17,12 @@ public sealed class GameContextInstaller : MonoBehaviour
         {
             if (installer is IGameServiceProvider serviceProvider)
             {
-                this.gameContext.AddService(serviceProvider.GetServices().ElementAt(0));
-
-                //serviceProvider.GetServices();
-                //Debug.Log(installer);
-                //Debug.Log(serviceProvider.Test().GetEnumerator().GetType());
-                //Debug.Log(serviceProvider.GetServices().ElementAt(0).GetType());
+                this.gameContext.AddServices(serviceProvider.GetServices());
             }
 
             if (installer is IGameListenerProvider listenerProvider)
             {
-                this.gameContext.AddListener(listenerProvider.GetListeners().ElementAt(0));
+                this.gameContext.AddListener(listenerProvider.GetListeners());
             }
         }
     }

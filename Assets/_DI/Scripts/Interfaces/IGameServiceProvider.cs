@@ -5,5 +5,4 @@ using UnityEngine;
 public interface IGameServiceProvider
 {
     IEnumerable<object> GetServices();
-    IEnumerable<object> Test();
 }

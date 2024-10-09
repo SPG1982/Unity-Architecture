@@ -46,6 +46,14 @@ public sealed class GameContext : MonoBehaviour, IGameLocator, IGameMachine
         this.gameMachine.AddListener(listener);
     }
 
+    public void AddListeners(IEnumerable listeners)
+    {
+        foreach (object listener in listeners)
+        {
+            this.gameMachine.AddListener(listener);
+        }
+    }
+
     public void RemoveListener(object listener)
     {
         this.gameMachine.RemoveListener(listener);
@@ -54,6 +62,14 @@ public sealed class GameContext : MonoBehaviour, IGameLocator, IGameMachine
     public void AddService(object service)
     {
         this.serviceLocator.AddService(service);
+    }
+
+    public void AddServices(IEnumerable services)
+    {
+        foreach (object service in services) {
+            this.serviceLocator.AddService(service);
+        }
+        
     }
 
     public void RemoveService(object service)

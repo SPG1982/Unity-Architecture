@@ -25,10 +25,4 @@ public sealed class InputInstaller : MonoBehaviour,
         //yield return this.mouseInput;
     }
 
-    IEnumerable<object> IGameServiceProvider.Test()
-    {
-        yield break;
-    }
-
-
 }
