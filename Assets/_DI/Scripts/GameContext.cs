@@ -23,6 +23,18 @@ public sealed class GameContext : MonoBehaviour, IGameLocator, IGameMachine
         this.gameMachine.StartGame();
     }
 
+    [ContextMenu("Pause Game")]
+    public void PauseGame()
+    {
+        this.gameMachine.PauseGame();
+    }
+
+    [ContextMenu("Resume Game")]
+    public void ResumeGame()
+    {
+        this.gameMachine.ResumeGame();
+    }
+
     [ContextMenu("Finish Game")]
     public void FinishGame()
     {

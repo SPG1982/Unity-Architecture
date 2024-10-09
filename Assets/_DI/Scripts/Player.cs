@@ -1,9 +1,6 @@
 using UnityEngine;
 
 
-namespace DI
-{
-
     public sealed class Player : MonoBehaviour, IPlayer
     {
         [SerializeField]
@@ -15,4 +12,4 @@ namespace DI
         }
 
     }
-}
+

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IPlayer
+public interface IGameListenerProvider
 {
-    void Move(Vector3 direction);
+    IEnumerable<object> GetListeners();
 }

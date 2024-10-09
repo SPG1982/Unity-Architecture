@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public sealed class GameMachine : MonoBehaviour
+public sealed class GameMachine
 {
     public GameState GameState
     {

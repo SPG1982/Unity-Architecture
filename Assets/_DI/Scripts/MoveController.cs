@@ -2,10 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-namespace DI
-{
-
     public sealed class MoveController : MonoBehaviour, IStartGameListener, IFinishGameListener
     {
         private IMoveInput input;
@@ -35,4 +31,3 @@ namespace DI
             player.Move(direction);
         }
     }
-}

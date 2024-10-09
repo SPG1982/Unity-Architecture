@@ -2,8 +2,6 @@
 using System.Collections;
 using UnityEngine;
 
-namespace DI {
-
     public sealed class KeyboardInput : MonoBehaviour, IStartGameListener, IFinishGameListener, IMoveInput
     {
         public event Action<Vector3> OnMove;
@@ -53,6 +51,3 @@ namespace DI {
         }
 
     }
-
-}
-

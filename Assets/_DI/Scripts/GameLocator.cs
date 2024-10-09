@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public sealed class GameLocator : MonoBehaviour
+public sealed class GameLocator
 {
     private readonly List<object> services = new();
 
