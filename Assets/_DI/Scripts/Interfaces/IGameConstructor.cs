@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IGameConstructor
 {
-    void ConstructGame(GameContext serviceLocator);
+    void ConstructGame(IGameLocator serviceLocator);
 }

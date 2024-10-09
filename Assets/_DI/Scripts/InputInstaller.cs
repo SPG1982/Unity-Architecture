@@ -6,7 +6,8 @@ public sealed class InputInstaller : MonoBehaviour,
         IGameServiceProvider,
         IGameListenerProvider
 {
-    private readonly KeyboardInput keyboardInput = new();
+    [SerializeField]
+    private KeyboardInput keyboardInput;
 
     //TODO: подключить ввод с мыши
     //[SerializeField]

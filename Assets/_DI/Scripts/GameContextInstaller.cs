@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public sealed class GameContextInstaller : MonoBehaviour
@@ -12,7 +11,7 @@ public sealed class GameContextInstaller : MonoBehaviour
     [SerializeField]
     private MonoBehaviour[] installers;
 
-    public void RegisterComponents()
+    private void Awake()
     {
         foreach (var installer in this.installers)
         {
@@ -23,13 +22,12 @@ public sealed class GameContextInstaller : MonoBehaviour
 
             if (installer is IGameListenerProvider listenerProvider)
             {
-                this.gameContext.AddListeners(listenerProvider.GetListeners());
+                this.gameContext.AddListener(listenerProvider.GetListeners());
             }
-
         }
     }
 
-    public void ConstructGame()
+    private void Start()
     {
         foreach (var installer in this.installers)
         {
@@ -37,12 +35,6 @@ public sealed class GameContextInstaller : MonoBehaviour
             {
                 constructor.ConstructGame(this.gameContext);
             }
-
-
-            var keyboardInput = gameContext.GetService<IMoveInput>();
-            gameContext.AddUpdateListener((IUpdateGameListener)keyboardInput);
-
-
         }
     }
 }

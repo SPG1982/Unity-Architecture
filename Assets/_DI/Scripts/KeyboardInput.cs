@@ -2,8 +2,8 @@
 using System.Collections;
 using UnityEngine;
 
-    public sealed class KeyboardInput : IStartGameListener, IFinishGameListener, IMoveInput, IUpdateGameListener
-{
+    public sealed class KeyboardInput : MonoBehaviour, IStartGameListener, IFinishGameListener, IMoveInput
+    {
         public event Action<Vector3> OnMove;
 
         private bool isActive;
@@ -50,11 +50,4 @@ using UnityEngine;
             this.OnMove?.Invoke(direction);
         }
 
-    void IUpdateGameListener.OnUpdate(float deltaTime)
-    {
-        if (this.isActive)
-        {
-            this.HandleKeyboard();
-        }
     }
-}

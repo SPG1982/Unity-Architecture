@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-    public sealed class MoveController : IStartGameListener, IFinishGameListener
+    public sealed class MoveController : MonoBehaviour, IStartGameListener, IFinishGameListener
     {
         private IMoveInput input;
 
