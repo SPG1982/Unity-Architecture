@@ -9,9 +9,28 @@ public sealed class GameContext : MonoBehaviour, IGameLocator, IGameMachine
         get { return this.gameMachine.GameState; }
     }
 
+    private readonly List<IUpdateGameListener> updateListeners = new();
+
     private readonly GameMachine gameMachine = new();
 
     private readonly GameLocator serviceLocator = new();
+
+    private void Awake()
+    {
+
+       // this.enabled = false;
+    }
+
+    //Вызывается только, если игра запущена
+    private void Update()
+    {
+        var deltaTime = Time.deltaTime;
+        for (int i = 0, count = this.updateListeners.Count; i < count; i++)
+        {
+            var listener = this.updateListeners[i];
+            listener.OnUpdate(deltaTime);
+        }
+    }
     public GameContext()
     {
         this.serviceLocator.AddService(this.gameMachine);
@@ -44,6 +63,11 @@ public sealed class GameContext : MonoBehaviour, IGameLocator, IGameMachine
     public void AddListener(object listener)
     {
         this.gameMachine.AddListener(listener);
+    }
+
+    public void AddUpdateListener(IUpdateGameListener listener)
+    {
+        updateListeners.Add(listener);
     }
 
     public void AddListeners(IEnumerable listeners)
