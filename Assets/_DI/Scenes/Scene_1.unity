@@ -654,9 +654,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   autoRun: 1
   taskList:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 106931eb2f479df42b282ac4638e4e26, type: 2}
+  - {fileID: 11400000, guid: f95422eecc052144fb2e9406a564cf2b, type: 2}
+  - {fileID: 11400000, guid: e8de266373f4a344ea3b7bb12c293f6b, type: 2}
 --- !u!4 &1688268023
 Transform:
   m_ObjectHideFlags: 0
